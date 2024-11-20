@@ -1,0 +1,36 @@
+[[language]]
+name = "python"
+language-servers = ["pylsp"]
+auto-format = true
+
+[[language]]
+name = "yaml"
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
+file-types = ["yaml", "yml"]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+language-servers = [{ name = "yaml-language-server" }]
+
+[[language]]
+name = "toml"
+auto-format = true
+formatter = { command = "taplo", args = ["format", "-"] }
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+
+
+[language-server.basedpyright.config]
+lint = true
+inlayHint.enable = true
+
+[language-server.pylsp.config.pylsp]
+plugins.pylsp_mypy.enabled = true
+plugins.pylsp_mypy.live_mode = true
+plugins.ruff.enabled = true

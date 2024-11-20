@@ -1,0 +1,42 @@
+line-length = 120
+indent-width = 4
+
+target-version = "py310"
+
+[format]
+# black defaults, made explicit
+quote-style = "double"
+indent-style = "space"
+
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+# don't combine short lines
+skip-magic-trailing-comma = false
+
+[lint]
+select = [
+  "F",      # PyFlakes
+  "E",      # PyCodestyle / PEP8
+  "ANN",    # Require type annotations
+  "D1",     # Require docstrings in public classes / methods / etc
+  "FIX001", # Finds FIXME
+  "FIX002", # Finds TODO
+  "B",      # Bugbear
+  "S",      # Bandit
+  "BLE",    # Blind Except
+  "A",      # Builtins
+  "PIE",    # Pie
+  "Q",      # quotes (could clash with format rule)
+  "SIM",    # Simplify
+  "ARG",    # Unused Arguments
+  "ERA",    # No commented code
+  "DOC",    # Docstring standards
+]
+
+ignore = [
+  "ANN101", # Ignore type annotation for self
+]
+
+[lint.pydocstyle]
+convention = "google"
