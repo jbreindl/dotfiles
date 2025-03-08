@@ -106,11 +106,11 @@ export EDITOR='hx'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH=$PATH:/snap/bin
+export PATH=$PATH:/snap/bin:~/bin
 
 setup_pyproject (){
   python3 -m venv venv
-  echo "source venv/bin/activate" > .envrc
-  echo "unset PS1" > .envrc
+  echo "source venv/bin/activate" >> .envrc
+  echo "unset PS1" >> .envrc
   direnv allow
 }
