@@ -3,3 +3,8 @@ theme = 'solarized_light'
 [editor]
 true-color = true
 line-number = "relative"
+
+[editor.indent-guides]
+render = true
+character = "|"
+skip-levels = 1
