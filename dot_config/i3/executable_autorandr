@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ $(xrandr -q | grep "HDMI-A-0 connected") ]]; then
+	autorandr home
+	nitrogen --restore
+fi
