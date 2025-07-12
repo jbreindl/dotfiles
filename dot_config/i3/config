@@ -75,7 +75,6 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-
 # split in horizontal orientation
 # bindsym $mod+h split h
 
@@ -147,8 +146,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # open browsers
-bindsym $mod+b exec "firefox"
-bindsym $mod+Shift+b exec "firefox -p personal"
+bindsym $mod+b exec --no-startup-id "firefox"
+bindsym $mod+Shift+b  exec --no-startup-id "firefox -p personal"
 # move containers between displays
 bindsym $mod+ctrl+l move workspace to output right
 bindsym $mod+ctrl+h move workspace to output left
@@ -172,32 +171,41 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
+# script for detecting if I'm on an external monitor
+exec_always --no-startup-id ~/.config/i3/autorandr && nitrogen --restore
+exec_always --no-startup-id picom
+
+# class         border  backgr text    indicator child border
+client.focused #859900 #859900 #fdf6e3 #6c71c4
+
 # assign the teams and outlook clients to workspace 2
-assign [class="Microsoft Teams"] 2
-assign [class="Outlook"] 2
+assign [class="teams-for-linux"] 2
+assign [class="outlook-for-linux"] 2
 
 # assign whatsapp and signal to workspace 5
 assign [class="WhatsApp"] 5
 assign [class="Signal"] 5
 
+# assign obsidian to workspace 3
+assign [class="obsidian"] 3
 
 bindsym $mod+r mode "resize"
+
+gaps inner 10
+gaps outer 0
 
 focus_follows_mouse no
 
 # start polybar and nitrogen
 exec_always --no-startup-id ~/.config/polybar/polybar.sh
-exec_always --no-startup-id nitrogen --restore
+
 
 exec "teams-for-linux"
 exec "outlook-for-linux"
 exec "whatsapp-linux-desktop"
 exec "signal-desktop"
-
-# script for detecting if I'm on an external monitor
-exec --no-startup-id ~/.config/i3/autorandr
-
-gaps inner 10
-gaps outer 0
-# class         border  backgr text    indicator child border
-client.focused #3999ed #285577 #ffffff #2e9ef4   #285577
+exec --no-startup-id "flameshot"
+exec "obsidian"
+client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
+client.unfocused #073642 #073642 #93a1a1 #586e75
+client.urgent #d33682 #d33682 #fdf6e3 #dc322f
