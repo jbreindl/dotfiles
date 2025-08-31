@@ -139,3 +139,8 @@ eval "$(zoxide init zsh)"
  
  alias vimdiff='vim -d'
  alias vim='nvim'
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+seshconn (){
+    sesh connect $(sesh list | fzf --reverse)
+}
