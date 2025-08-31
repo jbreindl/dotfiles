@@ -36,10 +36,12 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -49,7 +51,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -145,9 +147,6 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# open browsers
-bindsym $mod+b exec --no-startup-id "firefox"
-bindsym $mod+Shift+b  exec --no-startup-id "firefox -p personal"
 # move containers between displays
 bindsym $mod+ctrl+l move workspace to output right
 bindsym $mod+ctrl+h move workspace to output left
@@ -182,16 +181,16 @@ client.focused #859900 #859900 #fdf6e3 #6c71c4
 assign [class="teams-for-linux"] 2
 assign [class="outlook-for-linux"] 2
 
-# assign whatsapp and signal to workspace 5
-assign [class="WhatsApp"] 5
-assign [class="Signal"] 5
+# assign whatsapp and signal to workspace 4
+assign [class="WhatsApp"] 4
+assign [class="Signal"] 4
 
-# assign obsidian to workspace 3
-assign [class="obsidian"] 3
+assign [class="Zen Browser"] 3
+
 
 bindsym $mod+r mode "resize"
 
-gaps inner 10
+gaps inner 5
 gaps outer 0
 
 focus_follows_mouse no
@@ -204,8 +203,8 @@ exec "teams-for-linux"
 exec "outlook-for-linux"
 exec "whatsapp-linux-desktop"
 exec "signal-desktop"
+exec "zen"
 exec --no-startup-id "flameshot"
-exec "obsidian"
 client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 client.unfocused #073642 #073642 #93a1a1 #586e75
 client.urgent #d33682 #d33682 #fdf6e3 #dc322f
