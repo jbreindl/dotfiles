@@ -1,5 +1,9 @@
 #!/bin/bash
 
-if [[ $(xrandr -q | grep "HDMI-A-0 connected") ]]; then
+if [[ $(xrandr -q | grep "DisplayPort-0 connected") ]]; then
 	autorandr home
+elif [[ $(xrandr -q | grep "HDMI-A-0 connected") ]]; then
+	autorandr home_single
+else
+    xrandr --output eDP --set TearFree on
 fi

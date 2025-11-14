@@ -51,7 +51,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec wezterm
+bindsym $mod+Return exec ghostty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -181,12 +181,11 @@ client.focused #859900 #859900 #fdf6e3 #6c71c4
 assign [class="teams-for-linux"] 2
 assign [class="outlook-for-linux"] 2
 
+assign [class="(?i)zen browser"] 3
+
 # assign whatsapp and signal to workspace 4
 assign [class="WhatsApp"] 4
 assign [class="Signal"] 4
-
-assign [class="Zen Browser"] 3
-
 
 bindsym $mod+r mode "resize"
 

@@ -144,3 +144,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 seshconn (){
     sesh connect $(sesh list | fzf --reverse)
 }
+
+# opencode
+export PATH=/home/jbr/.opencode/bin:$PATH
