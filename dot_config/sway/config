@@ -1,3 +1,6 @@
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -22,10 +25,10 @@ exec "nm-applet --indicator"
 exec "blueman-applet"
 exec "swaync"
 
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 font pango:Lato 12
 
 # TODO: colors could be nicer
@@ -41,8 +44,14 @@ client.background       #fdf6e3
 
 
 # home monitors
-output "AOC Q32G2WG3 PSAN9JA000432" mode 2560x1440@144Hz scale 1 scale_filter smart
-output "GIGA-BYTE TECHNOLOGY CO., LTD. G27Q 22102B001504" mode 2560x1440@144Hz transform 90 scale 1 scale_filter smart
+# output "AOC Q32G2WG3 PSAN9JA000432" mode 2560x1440@144Hz scale 1 scale_filter nearest position 128 541
+output "GIGA-BYTE TECHNOLOGY CO., LTD. G27Q 22102B001504" mode 2560x1440@144Hz scale 1 scale_filter linear position 0 0
+
+# output "GIGA-BYTE TECHNOLOGY CO., LTD. G27Q 22102B001504" bg ~/Pictures/shlizz.jpeg fill
+output * bg ~/Pictures/wallpapers/house.jpg fill
+
+
+
 
 # configure clamshell mode
 set $laptop eDP-1
@@ -88,6 +97,10 @@ exec swayidle -w \
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 #
 # Moving around:
 #
@@ -144,6 +157,15 @@ exec swayidle -w \
     bindsym $mod+Control+j move workspace to output down
     bindsym $mod+Control+k move workspace to output up   
     bindsym $mod+Control+l move workspace to output right
+
+# Lock screen
+bindsym $mod+Shift+ctrl+l exec swaylock -f -c 000000
+# should find a cooler lock screen
+
+# screenshot
+bindsym $mod+p exec grimshot --notify copy area
+bindsym $mod+Shift+p exec grimshot --notify copy window
+
 #
 # Layout stuff:
 #
@@ -206,6 +228,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+gaps inner 5
+gaps outer 5
+
 #
 # Status Bar:
 #
@@ -222,6 +247,32 @@ bar {
 include /etc/sway/config.d/*
 
 input * {
-    xkb_layout "de"
+  xkb_layout "us,us(colemak_dh_iso),de"
 }
 default_border pixel 3
+
+exec "flameshot"
+
+bindsym $mod+Shift+Ctrl+Space input "type:keyboard" xkb_switch_layout next
+
+
+### Autostart
+
+# assign the teams and outlook clients to workspace 2
+assign [class="teams-for-linux"] 2
+assign [class="outlook-for-linux"] 2
+assign [class="thunderbird"] 2
+
+assign [app_id="zen"] 3
+
+# assign whatsapp and signal to workspace 4
+assign [class="WhatsApp"] 4
+assign [app_id="signal"] 4
+
+exec "teams-for-linux"
+exec "outlook-for-linux"
+exec "whatsapp-linux-desktop"
+exec /usr/bin/gnome-keyring-daemon --start --components=secrets
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec signal-desktop --password-store="gnome-libsecret"
+exec "~/.local/bin/zen"
