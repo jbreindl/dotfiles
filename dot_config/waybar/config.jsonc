@@ -11,16 +11,19 @@
         "sway/workspaces",
         "sway/mode",
         "sway/scratchpad",
-        "custom/media"
+        "custom/media",
     ],
     "modules-center": [
         "clock",
     ],
     "modules-right": [
         "pulseaudio",
-        "network",
         "cpu",
         "memory",
+        "battery",
+        "idle_inhibitor",
+        "sway/language",
+        "custom/notification",
         "tray",
     ],
     // Modules configuration
@@ -43,6 +46,10 @@
             "locked": "",
             "unlocked": ""
         }
+    },
+    "sway/language": {
+        "format": "{shortDescription}",
+
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -158,5 +165,25 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
+  "custom/notification": {
+    "tooltip": true,
+    "format": "<span size='16pt'>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
 }
 
