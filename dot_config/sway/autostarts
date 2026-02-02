@@ -1,0 +1,26 @@
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+### autostart
+exec "nm-applet --indicator"
+exec "blueman-applet"
+exec "swaync"
+
+# assign the teams and outlook clients to workspace 2
+assign [class="teams-for-linux"] 2
+assign [class="outlook-for-linux"] 2
+assign [class="thunderbird"] 2
+
+assign [app_id="zen"] 3
+
+# assign whatsapp and signal to workspace 4
+assign [class="WhatsApp"] 4
+assign [app_id="signal"] 4
+
+exec "teams-for-linux"
+exec "outlook-for-linux"
+exec "whatsapp-linux-desktop"
+exec /usr/bin/gnome-keyring-daemon --start --components=secrets
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec signal-desktop --password-store="gnome-libsecret"
+exec "~/.local/bin/zen"
