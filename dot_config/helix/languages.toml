@@ -1,6 +1,9 @@
 [language-server.gpt]
 command = "helix-gpt"
 
+[language-server.helix-assist]
+command = "helix-assist"
+
 [[language]]
 name = "rust"
 language-servers = ["rust-analyzer"]
@@ -12,7 +15,7 @@ command = "rust-analyzer"
 
 [[language]]
 name = "python"
-language-servers = ["pylsp", "ruff"]
+language-servers = ["ty", "ruff", "helix-assist"]
 auto-format = true
 formatter = { command = "bash", args = ["-c", "ruff check --fix --select I - | ruff format -"] }
 
@@ -41,6 +44,11 @@ args = ["--stdio"]
 [language-server.pylsp]
 command = "uv"
 args = ["run", "pylsp"]
+
+
+[language-server.ty]
+command = "uv"
+args = ["run", "ty", "server"]
 
 
 [language-server.basedpyright.config]
