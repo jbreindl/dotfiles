@@ -7,8 +7,16 @@
 }
 
 window#waybar {
-    background: #fdf6e3;
+    background: transparent;
     color: #586e75;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: #fdf6e3;
+    border-radius: 10px;
+    padding: 0 4px;
 }
 
 #workspaces button {
@@ -33,11 +41,6 @@ window#waybar {
 #clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray {
     padding: 0 10px;
     margin: 0 0px;
-    background-color: #eee8d5;
-}
-
-#battery {
-    background-color: #eee8d5;
 }
 
 #battery.charging {
@@ -48,30 +51,10 @@ window#waybar {
     color: #dc322f;
 }
 
-#cpu {
-    background-color: #eee8d5;
-}
-
-#memory {
-    background-color: #eee8d5;
-}
-
-#network {
-    background-color: #eee8d5;
-}
-
 #network.disconnected {
     color: #dc322f;
 }
 
-#pulseaudio {
-    background-color: #eee8d5;
-}
-
 #pulseaudio.muted {
     color: #dc322f;
-}
-
-#tray {
-    background-color: #eee8d5;
 }
